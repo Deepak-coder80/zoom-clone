@@ -34,18 +34,18 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Image.asset("assets/images/onboarding.jpg"),
           ),
           //google sign in button - custom button
-         CustomButton(text: 'Log in',
-             //google sign in
-             onPressed: () async{
+          CustomButton(
+              text: 'Log in',
+              //google sign in
+              onPressed: () async {
                 //get the return value of signInWithGoogle function
-               bool res =await _authMethod.signInWithGoogle(context);
-               //check the value of res
-               if(res){
-                 //if res is true navigate to Home screen
-                 Navigator.pushNamed(context, '/home');
-               }
-             }
-             ),
+                bool res = await _authMethod.signInWithGoogle(context);
+                //check the value of res
+                if (res) {
+                  //if res is true navigate to Home screen
+                  Navigator.pushNamed(context, '/home');
+                }
+              }),
         ],
       ),
     );
