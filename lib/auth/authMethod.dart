@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -5,6 +6,8 @@ import '../utils/showSnackBar.dart';
 class AuthMethod{
   //firebase auth instance
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  //firestore instance --for storing the user information
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   //function for sign in
   Future<bool> signInWithGoogle(BuildContext context)async{
     bool res = false;
@@ -26,6 +29,15 @@ class AuthMethod{
       final User? user = userCredential.user;
       //check null status of user
       if(user!=null){
+        //check the user is new to app
+        if(userCredential.additionalUserInfo!.isNewUser){
+          //if new add to user collection in the firestore
+          await _firestore.collection('users').doc(user.uid).set({
+            'username':user.displayName,
+            'uid':user.uid,
+            'profilePhoto':user.photoURL,
+          });
+        }
         //user is not null update the value of res to true
         res = true;
       }
