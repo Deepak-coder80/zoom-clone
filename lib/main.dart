@@ -10,21 +10,18 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: backgroundColor
-      ),
+      theme:
+          ThemeData.dark().copyWith(scaffoldBackgroundColor: backgroundColor),
       routes: {
         '/login': (context) => const LoginScreen(),
         '/home': (context) => const HomeScreen(),
       },
-      home:const LoginScreen(),
+      home: const LoginScreen(),
     );
   }
 }
-
